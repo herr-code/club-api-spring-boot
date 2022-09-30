@@ -29,6 +29,14 @@ Dependencias:
 - Spring Data JPA: Persiste los datos en almacenes SQL con la API de persistencia de Java usando Spring Data e Hibernate.
 - MySQL Driver: Controlador MySQL JDBC y R2DBC. Permite conectarnos a nuestra base de datos alojada en MySQL.
 
+### Estructura
+![estructura](https://user-images.githubusercontent.com/61515833/193315686-d6f37b9f-1c24-46ca-9403-3464ccda491e.png)
+
+#### `/controllers`: Aqui se encuentran los controladores necesarios para manejar las solicitudes HTTP a nuestra aplicación.
+#### `/repositories`: Contiene los repositorios para cada una de las entidades de nuestros modelos.
+#### `/models`: Modelos de las entidades de nuestra BD.
+#### `ClubalphaApplication.java`: Es el archivo principal. Contiene el método main() que a su vez utiliza el método de Spring Boot SpringApplication.run() para iniciar la aplicación.
+
 ### Base de datos
 
 ![db_diagram](https://user-images.githubusercontent.com/61515833/193292873-8d7e46f8-49a9-4f07-baaf-a0fb2f542e57.png)
