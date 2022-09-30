@@ -1,5 +1,6 @@
 package com.clubalpha.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
@@ -25,9 +26,11 @@ public class MemberClass {
     }
     
     @ManyToOne(fetch = LAZY)
+    @JsonIgnore
     @JoinColumn(name = "idMember", referencedColumnName="idMember")
     private Member member;
     
+    @JsonIgnore
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "idClass", referencedColumnName="idClass")
     private Class classe;
