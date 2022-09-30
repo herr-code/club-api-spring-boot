@@ -101,7 +101,17 @@ public class ClassController {
 
 ```
 
-#### `/repositories`: Contiene los repositorios para cada una de las entidades de nuestros modelos.
+#### `/repositories`: Contiene los repositorios para cada una de las entidades de nuestros modelos. Spring implementa automáticamente esta interfaz de repositorio en un bean que tiene el mismo nombre (con un cambio en el caso: se llama classRepository). Gracias a essto podemos implementar operaciones CRUD sobre la entidad (modelo) `/models/Class.java`.
+```java
+package com.clubalpha.repositories;
+
+import org.springframework.data.repository.CrudRepository;
+import com.clubalpha.models.Class;
+
+public interface ClassRepository extends CrudRepository<Class, Integer>{
+    
+}
+```
 #### `/models`: Modelos de las entidades de nuestra BD.
 #### `ClubalphaApplication.java`: Es el archivo principal. Contiene el método main() que a su vez utiliza el método de Spring Boot SpringApplication.run() para iniciar la aplicación.
 
