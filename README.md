@@ -12,15 +12,16 @@ Se requiere una servicio que nos permita crear horarios de un club deportivo. La
 - Horario: Tiene varias clases.
 - Asistentes: Pueden tomar más de una clase en más de un horario.
 
+## Solucíón
 
-## Tecnologías
+Se opta por trabajar con Spring Boot que a su vez pertenece al framework Spring de Java. Esto nos va a permitir tener código menos acoplado y de fácil integración con otras tecnologías. Además nos simplifica la configuración inicial y la preparación de la aplicación para producción .
 
-- Maven Project  
-- Apache Maven 3.8.5
-- Spring Boot 2.74
-- Java 8
-- jdk 1.8.0_181
-- Postman (para probar los endpoints)
+### Tecnologías
+ 
+- [Apache Maven 3.8.5:](https://maven.apache.org/) Herramienta de software para la gestión y construcción de proyectos Java.
+- [Spring Boot 2.74:](https://spring.io/) Proporciona un conjunto de herramientas para construir rápidamente aplicaciones de Spring fáciles de configurar.
+- [Java 8:](https://www.java.com/es/) Plataforma informática de lenguaje de programación Java. Contiene importantes actualizaciones del lenguaje.
+- [Postman:](https://www.postman.com/) Herramienta que permite testear colecciones o catálogos de APIs tanto para Frontend como para Backend.
 
 Dependencias:
 
@@ -28,7 +29,7 @@ Dependencias:
 - Spring Data JPA
 - MySQL Driver
 
-## Base de datos
+### Base de datos
 
 ![db_diagram](https://user-images.githubusercontent.com/61515833/193292873-8d7e46f8-49a9-4f07-baaf-a0fb2f542e57.png)
 
