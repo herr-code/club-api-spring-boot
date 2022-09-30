@@ -32,7 +32,75 @@ Dependencias:
 ### Estructura
 ![estructura](https://user-images.githubusercontent.com/61515833/193315686-d6f37b9f-1c24-46ca-9403-3464ccda491e.png)
 
+SpringBoot hace uso de anotaciones como `@Entity`, `@Autowired`, `@Controller`, etc. Pero que a ¿que se refieren? Pues son anotaciones de Java. Una anotación es un metadato que se incrusta en el código, se caracterizan por iniciar con el carácter @, este no cambia el comportamiento del código pero si puede indicarle al compilador acciones especificas de lectura o ejecución.
+
 #### `/controllers`: Aqui se encuentran los controladores necesarios para manejar las solicitudes HTTP a nuestra aplicación.
+```java
+@Controller //Indica que la clase será un controller
+@RequestMapping(path="/class") //Nos ayuda a mappear los HTTPRequest. Las URL inician con /class/ para POST, GET, PUT, DELETE 
+public class ClassController {
+    @Autowired //Sirve para poder acceder al archivo bean (generado automáicamente por spring) y manejar los datos (operaciones CRUD)
+    private InstructorRepository instructorRepository;
+    @Autowired 
+    private ClassRepository classRepository;
+    
+    // @ResponseBody -> Es la respuesta de la solicitud HTTP 
+    // @RequestParam -> Parámetros de la solicitud
+    @PostMapping(path="/add") //Mapeo del método POST
+    public @ResponseBody String addNewClass (@RequestParam String name,
+      @RequestParam String description,
+      @RequestParam String capacity,
+      @RequestParam String idInstructor) {
+      
+        //Se instancia un objeto del modelo y se le asignan los prámetros recibidos para la inserción en la BD
+        Class newClass = new Class(); 
+        newClass.setName(name);
+        newClass.setDescription(description);
+        newClass.setCapacity(Integer.parseInt(capacity));
+        
+        Instructor instructor = instructorRepository.findById(Integer.parseInt(idInstructor)).get();
+        newClass.setInstructor(instructor);
+
+        classRepository.save(newClass); //Guardar en la BD
+        return "Class Saved";
+    }
+
+    @GetMapping(path="/all") //Mapeo del método GET
+    public @ResponseBody Iterable<Class> getAllClasses() {
+        return classRepository.findAll(); //regresa todos los registros existentes en la tabla Class
+    }
+    
+    // Aqui se recibe el parámetro id con ayuda de @PathVariable
+    // @PathVariable se puede usar para manejar variables de plantilla en el mapeo de URI; extrae la parte con plantilla del URI, 
+    //representada por la variable {id}
+    @PutMapping(path="/changeClass/{id}") //Mapeo del método PUT
+    public @ResponseBody String changeClass(@PathVariable int id, @RequestParam String name,
+      @RequestParam String description,
+      @RequestParam String capacity,
+      @RequestParam String idInstructor) {
+        
+        Class updateClass = classRepository.findById(id).get(); // Buscamos el registro para actualizar sus datos     
+
+        updateClass.setName(name);
+        updateClass.setDescription(description);
+        updateClass.setCapacity(Integer.parseInt(capacity));
+       
+        Instructor instructor = instructorRepository.findById(Integer.parseInt(idInstructor)).get();
+        updateClass.setInstructor(instructor);
+        classRepository.save(updateClass);
+
+        return "Class updated";
+    }
+    
+    @DeleteMapping(path="/deleteClass/{id}") //Mapeo del método DELETE
+    public @ResponseBody String deleteClass(@PathVariable int id) {
+        classRepository.deleteById(id); //elimina la clase mediante su id
+        return "Class deleted";
+    }
+}
+
+```
+
 #### `/repositories`: Contiene los repositorios para cada una de las entidades de nuestros modelos.
 #### `/models`: Modelos de las entidades de nuestra BD.
 #### `ClubalphaApplication.java`: Es el archivo principal. Contiene el método main() que a su vez utiliza el método de Spring Boot SpringApplication.run() para iniciar la aplicación.
