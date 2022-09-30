@@ -1,5 +1,6 @@
 package com.clubalpha.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Entity;
 import static javax.persistence.FetchType.LAZY;
 import javax.persistence.Table;
@@ -19,10 +20,12 @@ public class Schedule {
     private String endTime;
     
     @ManyToOne(fetch = LAZY)
+    @JsonIgnore
     @JoinColumn(name = "idDay", referencedColumnName="idDay")
     private Day day;
     
     @ManyToOne(fetch = LAZY)
+    @JsonIgnore
     @JoinColumn(name = "idClass", referencedColumnName="idClass")
     private Class classe;
     
