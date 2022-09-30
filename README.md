@@ -25,9 +25,9 @@ Se opta por trabajar con Spring Boot que a su vez pertenece al framework Spring 
 
 Dependencias:
 
-- Spring Web
-- Spring Data JPA
-- MySQL Driver
+- Spring Web: Permite crear aplicaciones web, incluidas RESTful, utilizando Spring MVC. Utiliza Apache Tomcat como contenedor.
+- Spring Data JPA: Persiste los datos en almacenes SQL con la API de persistencia de Java usando Spring Data e Hibernate.
+- MySQL Driver: Controlador MySQL JDBC y R2DBC. Permite conectarnos a nuestra base de datos alojada en MySQL.
 
 ### Base de datos
 
