@@ -1,5 +1,18 @@
 # API Club
 
+[![Spring Boot](https://img.shields.io/badge/SpringBoot-v2.74-success?style=for-the-badge&logo=springboot)](https://spring.io/)
+
+Este proyecto contiene un API como servicio web para intercambiar datos entre cliente/servidor mediante HTTP Requests. Asi mismo se interactua con una base de datos relacional MySQL.
+
+## Planteamiento del problema
+
+Se requiere una servicio que nos permita crear horarios de un club deportivo. Las entidades y requerimientos son los siguientes:
+- Instructor: Puede dar varias clases en distintos horarios.
+- Clase
+- Horario: Tiene varias clases.
+- Asistentes: Pueden tomar más de una clase en más de un horario.
+
+
 ## Tecnologías
 
 - Maven Project  
@@ -7,6 +20,7 @@
 - Spring Boot 2.74
 - Java 8
 - jdk 1.8.0_181
+- Postman (para probar los endpoints)
 
 Dependencias:
 
