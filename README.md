@@ -162,6 +162,18 @@ public class Class {
 
 ### Base de datos
 
+Para hacer la conexión debemos establecer los parámetros en `resources/application.properties`
+
+```editor-config
+server.servlet.context-path=/clubalpha # Path de la aplicación 'http://localhost/8080/](http://localhost:8080/clubalpha.'
+spring.jpa.hibernate.ddl-auto=update # Le indica a Hibernate que cambie la base de datos de acuerdo con las estructuras de entidad dadas.
+spring.datasource.url=jdbc:mysql://${MYSQL_HOST:localhost}:3306/sports_club # Base de datos
+spring.datasource.username=springuser # Usuario
+spring.datasource.password=ThePassword # Password
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver # Driver MySQL
+#spring.jpa.show-sql: true
+```
+
 ![db_diagram](https://user-images.githubusercontent.com/61515833/193292873-8d7e46f8-49a9-4f07-baaf-a0fb2f542e57.png)
 
 ## Resultados
