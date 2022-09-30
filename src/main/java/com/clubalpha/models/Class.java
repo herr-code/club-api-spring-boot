@@ -1,5 +1,6 @@
 package com.clubalpha.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Entity;
 import static javax.persistence.FetchType.LAZY;
 import javax.persistence.Table;
@@ -20,6 +21,7 @@ public class Class {
     private Integer capacity;
     
     @ManyToOne(fetch = LAZY)
+    @JsonIgnore
     @JoinColumn(name = "idInstructor", referencedColumnName="idInstructor")
     private Instructor instructor;
     
