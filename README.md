@@ -112,7 +112,52 @@ public interface ClassRepository extends CrudRepository<Class, Integer>{
     
 }
 ```
-#### `/models`: Modelos de las entidades de nuestra BD.
+#### `/models`: Modelos de las entidades de nuestra BD. Hibernate ([ORM](https://hibernate.org/) para JAVA ) traduce automáticamente la entidad a una tabla de la BD.
+```java
+package com.clubalpha.models;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.Entity;
+import static javax.persistence.FetchType.LAZY;
+import javax.persistence.Table;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity //Esto le indica a Hibernate que debe hacer una tabla a partir de esta clase
+@Table(name="classes") //Personalizar el nombre de la tabla, por defecto sería class
+public class Class {
+    @Id // Indica que el campo de miembro a continuación es la clave principal de la entidad actual.
+    @GeneratedValue(strategy=GenerationType.IDENTITY) // Anotación para configurar la forma de incremento de la columna (id)  
+    // especificada. 
+    private Integer idClass;
+    private String name;  
+    private String description;
+    private Integer capacity;
+    
+    //Como esta es una tabla relacionada necesita especificar como es esa relación.
+    @ManyToOne(fetch = LAZY) // Relación Muchos a uno (Muchas clases pueden ser impartidas por un Instructor)
+    // los datos de Instructor no se inicializarán ni se cargarán en una memoria hasta que hagamos una llamada explícita. 
+    // Por lo que usaremos JsonIgnore para ignorarlos en la solicitud GET
+    @JsonIgnore
+    @JoinColumn(name = "idInstructor", referencedColumnName="idInstructor") //se crea la columna `id_instructor` en la tabla 
+    // `classes` y se referencia a `id_instructor` de la tabla `instructors`.
+    private Instructor instructor; // aqui almacenará el id_instructor asignado
+    
+    // Por eso su get y set son de este tipo
+    public Instructor getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
+    }
+    
+    // ... el resto de getters y setters
+}
+```
 #### `ClubalphaApplication.java`: Es el archivo principal. Contiene el método main() que a su vez utiliza el método de Spring Boot SpringApplication.run() para iniciar la aplicación.
 
 ### Base de datos
